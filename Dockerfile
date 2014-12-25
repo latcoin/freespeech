@@ -1,25 +1,25 @@
 #
-# Dockerfile for building Twister peer-to-peer micro-blogging
+# Dockerfile for building Freespeech peer-to-peer micro-blogging
 #
 FROM ubuntu:14.04
 
-# Install twister-core
+# Install freespeech-core
 RUN apt-get update
 RUN apt-get install -y git autoconf libtool build-essential libboost-all-dev libssl-dev libdb++-dev libminiupnpc-dev && apt-get clean
-#RUN git clone https://github.com/miguelfreitas/twister-core.git
-ADD . /twister-core
-RUN cd twister-core && \
+#RUN git clone https://github.com/miguelfreitas/freespeech-core.git
+ADD . /freespeech-core
+RUN cd freespeech-core && \
     ./bootstrap.sh && \
     make
 
-# Install twister-html
-RUN git clone https://github.com/miguelfreitas/twister-html.git /twister-html
+# Install freespeech-html
+RUN git clone https://github.com/miguelfreitas/freespeech-html.git /freespeech-html
 
 # Configure HOME directory
-# and persist twister data directory as a volume
+# and persist freespeech data directory as a volume
 ENV HOME /root
-VOLUME /root/.twister
+VOLUME /root/.freespeech
 
-# Run twisterd by default
-ENTRYPOINT ["/twister-core/twisterd", "-rpcuser=user", "-rpcpassword=pwd", "-rpcallowip=172.17.42.1", "-htmldir=/twister-html", "-printtoconsole"]
+# Run freespeechd by default
+ENTRYPOINT ["/freespeech-core/freespeechd", "-rpcuser=user", "-rpcpassword=pwd", "-rpcallowip=172.17.42.1", "-htmldir=/freespeech-html", "-printtoconsole"]
 EXPOSE 28332

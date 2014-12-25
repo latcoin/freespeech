@@ -38,7 +38,7 @@ POSSIBILITY OF SUCH DAMAGE.
 //#include <boost/date_time/posix_time/time_formatters_limited.hpp>
 #include <boost/random.hpp>
 #include <boost/nondet_random.hpp>
-#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/mersenne_freespeech.hpp>
 #include <boost/foreach.hpp>
 
 #include "libtorrent/io.hpp"
@@ -59,7 +59,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "libtorrent/kademlia/dht_get.hpp"
 #include "libtorrent/rsa.hpp"
 
-#include "../../src/twister.h"
+#include "../../src/freespeech.h"
 
 /* refresh dht itens we know by putting them to other peers every 60 minutes.
  * this period must be small enough to ensure persistency and big enough to

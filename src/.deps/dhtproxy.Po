@@ -1458,10 +1458,10 @@ src/dhtproxy.o: src/dhtproxy.cpp \
   src/walletdb.h src/db.h /usr/local/opt/berkeley-db4/include/db_cxx.h \
   /usr/local/opt/berkeley-db4/include/db.h src/base58.h \
   src/ui_interface.h /usr/local/include/boost/signals2/last_value.hpp \
-  src/twister.h src/json/json_spirit.h src/json/json_spirit_value.h \
+  src/freespeech.h src/json/json_spirit.h src/json/json_spirit_value.h \
   src/json/json_spirit_reader.h src/json/json_spirit_error_position.h \
   src/json/json_spirit_writer.h src/json/json_spirit_utils.h \
-  src/twister_utils.h
+  src/freespeech_utils.h
 
 /usr/local/include/boost/assign/list_of.hpp:
 
@@ -4441,7 +4441,7 @@ src/ui_interface.h:
 
 /usr/local/include/boost/signals2/last_value.hpp:
 
-src/twister.h:
+src/freespeech.h:
 
 src/json/json_spirit.h:
 
@@ -4455,4 +4455,4 @@ src/json/json_spirit_writer.h:
 
 src/json/json_spirit_utils.h:
 
-src/twister_utils.h:
+src/freespeech_utils.h:

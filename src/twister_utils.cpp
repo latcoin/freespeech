@@ -1,4 +1,4 @@
-#include "twister_utils.h"
+#include "freespeech_utils.h"
 
 #include "util.h"
 
@@ -13,7 +13,7 @@
 using namespace std;
 using namespace boost;
 
-twister_utils::twister_utils()
+freespeech_utils::freespeech_utils()
 {
 }
 

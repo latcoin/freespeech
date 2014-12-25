@@ -11,7 +11,7 @@
 #include "init.h"
 #include "net.h"
 #include "wallet.h"
-#include "twister.h"
+#include "freespeech.h"
 
 using namespace std;
 using namespace boost;

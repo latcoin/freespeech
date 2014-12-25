@@ -19,10 +19,10 @@ namespace libtorrent {
     class entry;
 }
 
-class twister
+class freespeech
 {
 public:
-    twister();
+    freespeech();
 };
 
 void startSessionTorrent(boost::thread_group& threadGroup);

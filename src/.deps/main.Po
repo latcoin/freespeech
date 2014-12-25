@@ -1202,7 +1202,7 @@ src/main.o: src/main.cpp src/alert.h \
   src/leveldb/include/leveldb/write_batch.h src/init.h src/wallet.h \
   src/walletdb.h src/base58.h src/ui_interface.h \
   /usr/local/include/boost/signals2/last_value.hpp src/checkqueue.h \
-  src/dhtproxy.h src/twister.h src/json/json_spirit.h \
+  src/dhtproxy.h src/freespeech.h src/json/json_spirit.h \
   src/json/json_spirit_value.h src/json/json_spirit_reader.h \
   src/json/json_spirit_error_position.h src/json/json_spirit_writer.h \
   src/json/json_spirit_utils.h src/utf8core.h \
@@ -3743,7 +3743,7 @@ src/checkqueue.h:
 
 src/dhtproxy.h:
 
-src/twister.h:
+src/freespeech.h:
 
 src/json/json_spirit.h:
 

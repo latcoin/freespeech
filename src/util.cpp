@@ -1038,7 +1038,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Twister";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Freespeech";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -1050,13 +1050,13 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     fs::create_directory(pathRet);
-    return pathRet / "Twister";
+    return pathRet / "Freespeech";
 #else
  #ifdef __ANDROID__
-    return "/sdcard/twister";
+    return "/sdcard/freespeech";
  #else
     // Unix
-    return pathRet / ".twister";
+    return pathRet / ".freespeech";
  #endif
 #endif
 #endif
@@ -1112,7 +1112,7 @@ boost::filesystem::path GetHTMLDir()
 
 boost::filesystem::path GetConfigFile()
 {
-    boost::filesystem::path pathConfigFile(GetArg("-conf", "twister.conf"));
+    boost::filesystem::path pathConfigFile(GetArg("-conf", "freespeech.conf"));
     if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir(false) / pathConfigFile;
     return pathConfigFile;
 }
@@ -1146,7 +1146,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 
 boost::filesystem::path GetPidFile()
 {
-    boost::filesystem::path pathPidFile(GetArg("-pid", "twisterd.pid"));
+    boost::filesystem::path pathPidFile(GetArg("-pid", "freespeechd.pid"));
     if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
     return pathPidFile;
 }
@@ -1372,7 +1372,7 @@ void AddTimeData(const CNetAddr& ip, int64 nTime)
                 if (!fMatch)
                 {
                     fDone = true;
-                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong Twister will not work properly.");
+                    string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong Freespeech will not work properly.");
                     strMiscWarning = strMessage;
                     printf("*** %s\n", strMessage.c_str());
                     uiInterface.ThreadSafeMessageBox(strMessage, "", CClientUIInterface::MSG_WARNING);

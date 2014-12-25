@@ -1435,7 +1435,7 @@ libtorrent/src/peer_connection.o: libtorrent/src/peer_connection.cpp \
   /usr/local/opt/openssl/include/openssl/rc4.h \
   /usr/local/opt/openssl/include/openssl/aes.h \
   libtorrent/include/libtorrent/error.hpp \
-  libtorrent/src/../../src/twister.h src/util.h src/uint256.h \
+  libtorrent/src/../../src/freespeech.h src/util.h src/uint256.h \
   /usr/local/include/boost/thread.hpp \
   /usr/local/include/boost/thread/thread.hpp \
   /usr/local/include/boost/thread/thread_only.hpp \
@@ -4534,7 +4534,7 @@ libtorrent/include/libtorrent/pe_crypto.hpp:
 
 libtorrent/include/libtorrent/error.hpp:
 
-libtorrent/src/../../src/twister.h:
+libtorrent/src/../../src/freespeech.h:
 
 src/util.h:
 

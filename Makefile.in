@@ -79,7 +79,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = twisterd$(EXEEXT)
+bin_PROGRAMS = freespeechd$(EXEEXT)
 subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
@@ -123,7 +123,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__twisterd_SOURCES_DIST = libtorrent/src/web_connection_base.cpp \
+am__freespeechd_SOURCES_DIST = libtorrent/src/web_connection_base.cpp \
 	libtorrent/src/alert.cpp libtorrent/src/alert_manager.cpp \
 	libtorrent/src/allocator.cpp libtorrent/src/asio.cpp \
 	libtorrent/src/assert.cpp libtorrent/src/bandwidth_limit.cpp \
@@ -201,8 +201,8 @@ am__twisterd_SOURCES_DIST = libtorrent/src/web_connection_base.cpp \
 	src/softcheckpoint.cpp src/sync.cpp src/util.cpp \
 	src/wallet.cpp src/walletdb.cpp src/hash.cpp src/bloom.cpp \
 	src/noui.cpp src/leveldb.cpp src/txdb.cpp src/chainparams.cpp \
-	src/dhtproxy.cpp src/twister.cpp src/twister_rss.cpp \
-	src/twister_utils.cpp src/scrypt-sse2.cpp
+	src/dhtproxy.cpp src/freespeech.cpp src/freespeech_rss.cpp \
+	src/freespeech_utils.cpp src/scrypt-sse2.cpp
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = libtorrent/src/kademlia/dht_tracker.$(OBJEXT) \
 	libtorrent/src/kademlia/find_data.$(OBJEXT) \
@@ -307,17 +307,17 @@ am__objects_6 = src/alert.$(OBJEXT) src/version.$(OBJEXT) \
 	src/walletdb.$(OBJEXT) src/hash.$(OBJEXT) src/bloom.$(OBJEXT) \
 	src/noui.$(OBJEXT) src/leveldb.$(OBJEXT) src/txdb.$(OBJEXT) \
 	src/chainparams.$(OBJEXT) src/dhtproxy.$(OBJEXT) \
-	src/twister.$(OBJEXT) src/twister_rss.$(OBJEXT) \
-	src/twister_utils.$(OBJEXT) $(am__objects_5)
-am_twisterd_OBJECTS = $(am__objects_4) $(am__objects_6)
-twisterd_OBJECTS = $(am_twisterd_OBJECTS)
+	src/freespeech.$(OBJEXT) src/freespeech_rss.$(OBJEXT) \
+	src/freespeech_utils.$(OBJEXT) $(am__objects_5)
+am_freespeechd_OBJECTS = $(am__objects_4) $(am__objects_6)
+freespeechd_OBJECTS = $(am_freespeechd_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-twisterd_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+freespeechd_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(twisterd_LDFLAGS) $(LDFLAGS) -o $@
+	$(CXXFLAGS) $(freespeechd_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -370,8 +370,8 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(twisterd_SOURCES)
-DIST_SOURCES = $(am__twisterd_SOURCES_DIST)
+SOURCES = $(freespeechd_SOURCES)
+DIST_SOURCES = $(am__freespeechd_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -733,15 +733,15 @@ BITCOIN_TWISTER_SOURCES = \
     src/txdb.cpp \
     src/chainparams.cpp \
     src/dhtproxy.cpp \
-    src/twister.cpp \
-    src/twister_rss.cpp \
-    src/twister_utils.cpp \
+    src/freespeech.cpp \
+    src/freespeech_rss.cpp \
+    src/freespeech_utils.cpp \
     $(SSE2_SOURCES)
 
-twisterd_SOURCES = $(LIBTORRENT_SOURCES) $(BITCOIN_TWISTER_SOURCES)
-twisterd_LDFLAGS = @OPENSSL_LDFLAGS@ @DB_CXX_LDFLAGS@
-twisterd_DEPENDENCIES = $(LIBLEVELDB) $(LIBMEMENV)
-twisterd_LDADD = $(LIBLEVELDB) $(LIBMEMENV) \
+freespeechd_SOURCES = $(LIBTORRENT_SOURCES) $(BITCOIN_TWISTER_SOURCES)
+freespeechd_LDFLAGS = @OPENSSL_LDFLAGS@ @DB_CXX_LDFLAGS@
+freespeechd_DEPENDENCIES = $(LIBLEVELDB) $(LIBMEMENV)
+freespeechd_LDADD = $(LIBLEVELDB) $(LIBMEMENV) \
     @BOOST_SYSTEM_LIB@ @BOOST_FILESYSTEM_LIB@ @BOOST_PROGRAM_OPTIONS_LIB@ @BOOST_THREAD_LIB@ @BOOST_CHRONO_LIB@ @BOOST_LOCALE_LIB@ \
     @BOOST_REGEX_LIB@ @BOOST_LDFLAGS@ @DB_CXX_LIBS@ @OPENSSL_LIBS@
 
@@ -1144,18 +1144,18 @@ src/chainparams.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/dhtproxy.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/twister.$(OBJEXT): src/$(am__dirstamp) \
+src/freespeech.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/twister_rss.$(OBJEXT): src/$(am__dirstamp) \
+src/freespeech_rss.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/twister_utils.$(OBJEXT): src/$(am__dirstamp) \
+src/freespeech_utils.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/scrypt-sse2.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 
-twisterd$(EXEEXT): $(twisterd_OBJECTS) $(twisterd_DEPENDENCIES) $(EXTRA_twisterd_DEPENDENCIES) 
-	@rm -f twisterd$(EXEEXT)
-	$(AM_V_CXXLD)$(twisterd_LINK) $(twisterd_OBJECTS) $(twisterd_LDADD) $(LIBS)
+freespeechd$(EXEEXT): $(freespeechd_OBJECTS) $(freespeechd_DEPENDENCIES) $(EXTRA_freespeechd_DEPENDENCIES) 
+	@rm -f freespeechd$(EXEEXT)
+	$(AM_V_CXXLD)$(freespeechd_LINK) $(freespeechd_OBJECTS) $(freespeechd_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -1292,9 +1292,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/scrypt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/softcheckpoint.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/sync.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/twister.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/twister_rss.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/twister_utils.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/freespeech.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/freespeech_rss.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/freespeech_utils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/txdb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/util.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/version.Po@am__quote@

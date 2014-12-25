@@ -1304,7 +1304,7 @@ src/bitcoinrpc.o: src/bitcoinrpc.cpp src/chainparams.h src/bignum.h \
   /usr/local/include/boost/spirit/home/classic/iterator/position_iterator_fwd.hpp \
   /usr/local/include/boost/spirit/home/classic/iterator/impl/position_iterator.ipp \
   src/json/json_spirit_writer_template.h src/json/json_spirit_utils.h \
-  src/twister_utils.h src/json/json_spirit.h \
+  src/freespeech_utils.h src/json/json_spirit.h \
   src/json/json_spirit_reader.h src/json/json_spirit_writer.h \
   libtorrent/include/libtorrent/entry.hpp \
   libtorrent/include/libtorrent/size_type.hpp \
@@ -1315,7 +1315,7 @@ src/bitcoinrpc.o: src/bitcoinrpc.cpp src/chainparams.h src/bignum.h \
   libtorrent/include/libtorrent/string_util.hpp \
   libtorrent/include/libtorrent/max.hpp \
   libtorrent/include/libtorrent/peer_id.hpp \
-  libtorrent/include/libtorrent/escape_string.hpp src/twister_rss.h \
+  libtorrent/include/libtorrent/escape_string.hpp src/freespeech_rss.h \
   /usr/local/include/boost/algorithm/string.hpp \
   /usr/local/include/boost/algorithm/string/std_containers_traits.hpp \
   /usr/local/include/boost/algorithm/string/std/string_traits.hpp \
@@ -4537,7 +4537,7 @@ src/json/json_spirit_writer_template.h:
 
 src/json/json_spirit_utils.h:
 
-src/twister_utils.h:
+src/freespeech_utils.h:
 
 src/json/json_spirit.h:
 
@@ -4565,7 +4565,7 @@ libtorrent/include/libtorrent/peer_id.hpp:
 
 libtorrent/include/libtorrent/escape_string.hpp:
 
-src/twister_rss.h:
+src/freespeech_rss.h:
 
 /usr/local/include/boost/algorithm/string.hpp:
 

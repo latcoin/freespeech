@@ -385,7 +385,7 @@ void ThreadFlushWalletDB(const string& strFile)
                     map<string, int>::iterator mi = bitdb.mapFileUseCount.find(strFile);
                     if (mi != bitdb.mapFileUseCount.end())
                     {
-                        printf("Flushing twisterwallet.dat\n");
+                        printf("Flushing freespeechwallet.dat\n");
                         nLastFlushed = nWalletDBUpdated;
                         int64 nStart = GetTimeMillis();
 
@@ -394,7 +394,7 @@ void ThreadFlushWalletDB(const string& strFile)
                         bitdb.CheckpointLSN(strFile);
 
                         bitdb.mapFileUseCount.erase(mi++);
-                        printf("Flushed twisterwallet.dat %"PRI64d"ms\n", GetTimeMillis() - nStart);
+                        printf("Flushed freespeechwallet.dat %"PRI64d"ms\n", GetTimeMillis() - nStart);
                     }
                 }
             }
@@ -417,7 +417,7 @@ bool BackupWallet(const CWallet& wallet, const string& strDest)
                 bitdb.CheckpointLSN(wallet.strWalletFile);
                 bitdb.mapFileUseCount.erase(wallet.strWalletFile);
 
-                // Copy twisterwallet.dat
+                // Copy freespeechwallet.dat
                 filesystem::path pathSrc = GetDataDir() / wallet.strWalletFile;
                 filesystem::path pathDest(strDest);
                 if (filesystem::is_directory(pathDest))
@@ -429,10 +429,10 @@ bool BackupWallet(const CWallet& wallet, const string& strDest)
 #else
                     filesystem::copy_file(pathSrc, pathDest);
 #endif
-                    printf("copied twisterwallet.dat to %s\n", pathDest.string().c_str());
+                    printf("copied freespeechwallet.dat to %s\n", pathDest.string().c_str());
                     return true;
                 } catch(const filesystem::filesystem_error &e) {
-                    printf("error copying twisterwallet.dat to %s - %s\n", pathDest.string().c_str(), e.what());
+                    printf("error copying freespeechwallet.dat to %s - %s\n", pathDest.string().c_str(), e.what());
                     return false;
                 }
             }

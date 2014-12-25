@@ -104,8 +104,8 @@ public:
         pchMessageStart[2] = 0xbb;
         pchMessageStart[3] = 0xd2;
         vAlertPubKey = ParseHex("04fc9702847840aaf195de8442ebecedf5b095cdbb9bc716bda9110971b28a49e0ead8564ff0db22209e0374782c093bb899692d524e9d6a6956e7c5ecbcd68284");
-        nDefaultPort = 28333;
-        nRPCPort = 28332;
+        nDefaultPort = 58433;
+        nRPCPort = 58432;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 1);
         nTxBits = 0x1e00ffff;
         nSubsidyHalvingInterval = 210000;
@@ -136,13 +136,13 @@ public:
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("9915158279673d101912be80f25c20627f1dd8bf5231e7c46bfec5ed19737f44"));
 
-        vSeeds.push_back(CDNSSeedData("twister.net.co", "seed.twister.net.co"));
+        vSeeds.push_back(CDNSSeedData("freespeech.net.co", "seed.freespeech.net.co"));
         vSeeds.push_back(CDNSSeedData("gombadi.com", "dnsseed.gombadi.com"));
-        vSeeds.push_back(CDNSSeedData("twister.net.co", "seed2.twister.net.co"));
-        vSeeds.push_back(CDNSSeedData("twister.net.co", "seed3.twister.net.co"));
-        vSeeds.push_back(CDNSSeedData("twisterseed.tk", "twisterseed.tk"));
+        vSeeds.push_back(CDNSSeedData("freespeech.net.co", "seed2.freespeech.net.co"));
+        vSeeds.push_back(CDNSSeedData("freespeech.net.co", "seed3.freespeech.net.co"));
+        vSeeds.push_back(CDNSSeedData("freespeechseed.tk", "freespeechseed.tk"));
         vSeeds.push_back(CDNSSeedData("cruller.tasty.sexy", "cruller.tasty.sexy"));
-        vSeeds.push_back(CDNSSeedData("twister-seeder.muh.freedu.ms", "twister-seeder.muh.freedu.ms"));
+        vSeeds.push_back(CDNSSeedData("freespeech-seeder.muh.freedu.ms", "freespeech-seeder.muh.freedu.ms"));
 
         base58Prefixes[PUBKEY_ADDRESS] = 0;
         base58Prefixes[SCRIPT_ADDRESS] = 5;

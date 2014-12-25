@@ -1334,7 +1334,7 @@ src/rpcwallet.o: src/rpcwallet.cpp \
   /usr/local/include/boost/spirit/home/classic/iterator/position_iterator_fwd.hpp \
   /usr/local/include/boost/spirit/home/classic/iterator/impl/position_iterator.ipp \
   src/json/json_spirit_writer_template.h src/json/json_spirit_utils.h \
-  src/init.h src/twister.h src/json/json_spirit.h \
+  src/init.h src/freespeech.h src/json/json_spirit.h \
   src/json/json_spirit_reader.h src/json/json_spirit_writer.h
 
 /usr/local/include/boost/assign/list_of.hpp:
@@ -4067,7 +4067,7 @@ src/json/json_spirit_utils.h:
 
 src/init.h:
 
-src/twister.h:
+src/freespeech.h:
 
 src/json/json_spirit.h:
 

@@ -1307,7 +1307,7 @@ src/rpcdump.o: src/rpcdump.cpp \
   /usr/local/include/boost/spirit/home/classic/iterator/position_iterator_fwd.hpp \
   /usr/local/include/boost/spirit/home/classic/iterator/impl/position_iterator.ipp \
   src/json/json_spirit_writer_template.h src/json/json_spirit_utils.h \
-  src/twister.h src/json/json_spirit.h src/json/json_spirit_reader.h \
+  src/freespeech.h src/json/json_spirit.h src/json/json_spirit_reader.h \
   src/json/json_spirit_writer.h \
   /usr/local/include/boost/date_time/posix_time/posix_time.hpp \
   /usr/local/include/boost/date_time/posix_time/time_formatters.hpp \
@@ -4184,7 +4184,7 @@ src/json/json_spirit_writer_template.h:
 
 src/json/json_spirit_utils.h:
 
-src/twister.h:
+src/freespeech.h:
 
 src/json/json_spirit.h:
 

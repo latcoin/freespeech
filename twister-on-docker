@@ -1,13 +1,13 @@
 #!/bin/sh
 #
-# Build or run a docker image of twister
+# Build or run a docker image of freespeech
 #
 
 ACTION=${1:-run}
 MODE=${2:---local}
 
-IMAGE_NAME=twister
-REMOTE_IMAGE_NAME=miguelfreitas/twister
+IMAGE_NAME=freespeech
+REMOTE_IMAGE_NAME=miguelfreitas/freespeech
 
 set -e
 
@@ -28,12 +28,12 @@ run)
     docker pull $IMAGE_NAME
   fi
   echo Running $IMAGE_NAME
-  docker run -d -p 28332:28332 -v $HOME/.twister:/root/.twister $IMAGE_NAME "$@"
-  echo "Twister should now be running at http://localhost:28332 (access with \"user\" / \"pwd\")"
+  docker run -d -p 28332:28332 -v $HOME/.freespeech:/root/.freespeech $IMAGE_NAME "$@"
+  echo "Freespeech should now be running at http://localhost:28332 (access with \"user\" / \"pwd\")"
   ;;
 
 stop)
-  CID=$(docker ps | grep twister | awk '{print $1}')
+  CID=$(docker ps | grep freespeech | awk '{print $1}')
   if [ "$CID" ]; then
     echo Stopping container $CID
     docker stop $CID
@@ -44,13 +44,13 @@ stop)
 *)
   echo Usage:
   echo "         $0 run [ARGS FOR TWISTERD..]"
-  echo "         Run twister from a local docker build (default)"
+  echo "         Run freespeech from a local docker build (default)"
   echo
   echo "         $0 run --remote [ARGS FOR TWISTERD..]"
-  echo "         Run twister from the remote docker build at \"$REMOTE_IMAGE_NAME\""
+  echo "         Run freespeech from the remote docker build at \"$REMOTE_IMAGE_NAME\""
   echo
   echo "         $0 build"
-  echo "         Build a local docker image for twister"
+  echo "         Build a local docker image for freespeech"
 
   exit 2
 

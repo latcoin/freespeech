@@ -1,7 +1,7 @@
 // Copyright (c) 2014 Miguel Freitas
 // TODO: write description for the soft checkpoint
 // More info:
-// https://groups.google.com/forum/#!topic/twister-dev/tH3HlVQ_wmo
+// https://groups.google.com/forum/#!topic/freespeech-dev/tH3HlVQ_wmo
 
 #include <boost/assign/list_of.hpp> // for 'map_list_of()'
 #include <boost/assign.hpp>
@@ -14,7 +14,7 @@
 #include "uint256.h"
 #include "script.h"
 #include "init.h"
-#include "twister.h"
+#include "freespeech.h"
 
 //#define dbgprintf OutputDebugStringF
 #define dbgprintf(...) // no debug printf

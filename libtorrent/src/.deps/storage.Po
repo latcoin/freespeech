@@ -1409,7 +1409,7 @@ libtorrent/src/storage.o: libtorrent/src/storage.cpp \
   libtorrent/include/libtorrent/fingerprint.hpp \
   libtorrent/include/libtorrent/build_config.hpp \
   libtorrent/include/libtorrent/alloca.hpp \
-  libtorrent/src/../../src/twister.h src/util.h src/uint256.h \
+  libtorrent/src/../../src/freespeech.h src/util.h src/uint256.h \
   /usr/local/include/boost/thread.hpp \
   /usr/local/include/boost/thread/thread.hpp \
   /usr/local/include/boost/thread/thread_only.hpp \
@@ -4471,7 +4471,7 @@ libtorrent/include/libtorrent/build_config.hpp:
 
 libtorrent/include/libtorrent/alloca.hpp:
 
-libtorrent/src/../../src/twister.h:
+libtorrent/src/../../src/freespeech.h:
 
 src/util.h:
 

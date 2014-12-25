@@ -1334,7 +1334,7 @@ src/rpcrawtransaction.o: src/rpcrawtransaction.cpp \
   /usr/local/opt/openssl/include/openssl/rand.h src/mruset.h \
   src/limitedmap.h src/protocol.h src/addrman.h src/bloom.h \
   src/ui_interface.h /usr/local/include/boost/signals2/last_value.hpp \
-  src/twister.h src/json/json_spirit.h src/json/json_spirit_reader.h \
+  src/freespeech.h src/json/json_spirit.h src/json/json_spirit_reader.h \
   src/json/json_spirit_writer.h
 
 /usr/local/include/boost/assign/list_of.hpp:
@@ -4067,7 +4067,7 @@ src/ui_interface.h:
 
 /usr/local/include/boost/signals2/last_value.hpp:
 
-src/twister.h:
+src/freespeech.h:
 
 src/json/json_spirit.h:
 

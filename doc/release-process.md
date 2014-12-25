@@ -23,11 +23,11 @@ Release Process
 
 ###perform gitian builds
 
- From a directory containing the twister source, gitian-builder and gitian.sigs
+ From a directory containing the freespeech source, gitian-builder and gitian.sigs
   
 #	export SIGNER=(your gitian key, ie bluematt, sipa, etc)
 	export VERSION=(new version, e.g. 0.8.0)
-	pushd ./twister-core
+	pushd ./freespeech-core
 	git checkout v${VERSION}
 	popd
 	pushd ./gitian-builder
@@ -59,21 +59,21 @@ Release Process
 	wget 'https://github.com/theuni/libdmg-hfsplus/archive/libdmg-hfsplus-v0.1.tar.gz'
 	wget 'http://llvm.org/releases/3.2/clang+llvm-3.2-x86-linux-ubuntu-12.04.tar.gz' -O clang-llvm-3.2-x86-linux-ubuntu-12.04.tar.gz
 	cd ..
-	./bin/gbuild ../twister-core/contrib/gitian-descriptors/boost-linux.yml
+	./bin/gbuild ../freespeech-core/contrib/gitian-descriptors/boost-linux.yml
 	mv build/out/boost-*.zip inputs/
-	./bin/gbuild ../twister-core/contrib/gitian-descriptors/deps-linux.yml
-	mv build/out/twister-deps-*.zip inputs/
-	./bin/gbuild ../twister-core/contrib/gitian-descriptors/boost-win.yml
+	./bin/gbuild ../freespeech-core/contrib/gitian-descriptors/deps-linux.yml
+	mv build/out/freespeech-deps-*.zip inputs/
+	./bin/gbuild ../freespeech-core/contrib/gitian-descriptors/boost-win.yml
 	mv build/out/boost-*.zip inputs/
-	./bin/gbuild ../twister-core/contrib/gitian-descriptors/deps-win.yml
-	mv build/out/twister-deps-*.zip inputs/
-	./bin/gbuild ../twister-core/contrib/gitian-descriptors/protobuf-win.yml
+	./bin/gbuild ../freespeech-core/contrib/gitian-descriptors/deps-win.yml
+	mv build/out/freespeech-deps-*.zip inputs/
+	./bin/gbuild ../freespeech-core/contrib/gitian-descriptors/protobuf-win.yml
 	mv build/out/protobuf-*.zip inputs/
-	./bin/gbuild ../twister-core/contrib/gitian-descriptors/gitian-osx-native.yml
+	./bin/gbuild ../freespeech-core/contrib/gitian-descriptors/gitian-osx-native.yml
 	mv build/out/osx-*.tar.gz inputs/
-	./bin/gbuild ../twister-core/contrib/gitian-descriptors/gitian-osx-depends.yml
+	./bin/gbuild ../freespeech-core/contrib/gitian-descriptors/gitian-osx-depends.yml
 	mv build/out/osx-*.tar.gz inputs/
-	./bin/gbuild ../twister-core/contrib/gitian-descriptors/gitian-osx-qt.yml
+	./bin/gbuild ../freespeech-core/contrib/gitian-descriptors/gitian-osx-qt.yml
 	mv build/out/osx-*.tar.gz inputs/
 
  The expected SHA256 hashes of the intermediate inputs are:
@@ -86,10 +86,10 @@ Release Process
     a0999037e8b0ef9ade13efd88fee261ba401f5ca910068b7e0cd3262ba667db0  protobuf-win64-2.5.0-gitian-r4.zip
 
 
- Build twister-core for Linux, Windows, and OS X:
+ Build freespeech-core for Linux, Windows, and OS X:
   
-#	./bin/gbuild --commit twister-core=v${VERSION} ../twister-core/contrib/gitian-descriptors/gitian-win.yml
-	./bin/gbuild --commit twister-core=HEAD ../twister-core/contrib/gitian-descriptors/gitian-win.yml
+#	./bin/gbuild --commit freespeech-core=v${VERSION} ../freespeech-core/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gbuild --commit freespeech-core=HEAD ../freespeech-core/contrib/gitian-descriptors/gitian-win.yml
 #	./bin/gsign --signer $SIGNER --release ${VERSION}-win --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
 	pushd build/out
 	zip -r bitcoin-${VERSION}-win-gitian.zip *

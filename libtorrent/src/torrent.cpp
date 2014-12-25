@@ -4949,7 +4949,7 @@ namespace libtorrent
 	}
 #endif
 
-    // [MF] num_pieces increases with new twister posts
+    // [MF] num_pieces increases with new freespeech posts
     void torrent::increase_num_pieces(int num_pieces)
     {
         if( m_torrent_file->num_pieces() > num_pieces )

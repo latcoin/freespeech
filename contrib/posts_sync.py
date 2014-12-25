@@ -20,7 +20,7 @@ from optparse import OptionParser
 parser = OptionParser("usage: %prog [options] <page_url> <username>")
 parser.add_option("-s", "--serverUrl",
                   action="store", dest="serverUrl", default="http://user:pwd@127.0.0.1:28332",
-                  help="connect to specified twisterd server URL")
+                  help="connect to specified freespeechd server URL")
 parser.add_option("-p", "--proxyUrl",
                   action="store", dest="proxyUrl", default="",
                   help="proxyUrl to use")
@@ -34,11 +34,11 @@ if len(args) != 2:
 pageUrl = args[0]
 username = args[1]
 
-### connect to twisterd
+### connect to freespeechd
 
-twister = AuthServiceProxy(options.serverUrl)
+freespeech = AuthServiceProxy(options.serverUrl)
 lastK = -1
-lastUserPost = twister.getposts(1, [{"username":username}])
+lastUserPost = freespeech.getposts(1, [{"username":username}])
 for i in range(len(lastUserPost)):
     if lastUserPost[i]["userpost"]["n"] == username:
         lastK = int(lastUserPost[i]["userpost"]["k"])
@@ -85,7 +85,7 @@ for i in xrange(len(items)-1,0,-1):
         print "newpostmsg", username, lastK+1, ptext
         if not options.dryRun:
             try:
-                twister.newpostmsg(username, lastK+1, ptext)
+                freespeech.newpostmsg(username, lastK+1, ptext)
             except:
                 pass
         lastK = lastK+1

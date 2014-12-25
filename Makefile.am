@@ -14,7 +14,7 @@ $(LIBLEVELDB) $(LIBMEMENV):
 	  CC="$(CC)" PLATFORM=$(TARGET_OS) AR="$(AR)" $(LEVELDB_TARGET_FLAGS) \
           OPT="$(CXXFLAGS) $(CPPFLAGS)"
 
-bin_PROGRAMS = twisterd
+bin_PROGRAMS = freespeechd
 
 KADEMLIA_SOURCES = \
   libtorrent/src/kademlia/dht_tracker.cpp      \
@@ -165,18 +165,18 @@ BITCOIN_TWISTER_SOURCES = \
     src/txdb.cpp \
     src/chainparams.cpp \
     src/dhtproxy.cpp \
-    src/twister.cpp \
-    src/twister_rss.cpp \
-    src/twister_utils.cpp \
+    src/freespeech.cpp \
+    src/freespeech_rss.cpp \
+    src/freespeech_utils.cpp \
     $(SSE2_SOURCES)
 
-twisterd_SOURCES = $(LIBTORRENT_SOURCES) $(BITCOIN_TWISTER_SOURCES)
+freespeechd_SOURCES = $(LIBTORRENT_SOURCES) $(BITCOIN_TWISTER_SOURCES)
 
-twisterd_LDFLAGS = @OPENSSL_LDFLAGS@ @DB_CXX_LDFLAGS@
+freespeechd_LDFLAGS = @OPENSSL_LDFLAGS@ @DB_CXX_LDFLAGS@
 
-twisterd_DEPENDENCIES = $(LIBLEVELDB) $(LIBMEMENV)
+freespeechd_DEPENDENCIES = $(LIBLEVELDB) $(LIBMEMENV)
 
-twisterd_LDADD = $(LIBLEVELDB) $(LIBMEMENV) \
+freespeechd_LDADD = $(LIBLEVELDB) $(LIBMEMENV) \
     @BOOST_SYSTEM_LIB@ @BOOST_FILESYSTEM_LIB@ @BOOST_PROGRAM_OPTIONS_LIB@ @BOOST_THREAD_LIB@ @BOOST_CHRONO_LIB@ @BOOST_LOCALE_LIB@ \
     @BOOST_REGEX_LIB@ @BOOST_LDFLAGS@ @DB_CXX_LIBS@ @OPENSSL_LIBS@
 

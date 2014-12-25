@@ -15,7 +15,7 @@
 #include "chainparams.h"
 #include "dhtproxy.h"
 
-#include "twister.h"
+#include "freespeech.h"
 #include "utf8core.h"
 
 #include <boost/algorithm/string/replace.hpp>
@@ -51,7 +51,7 @@ int nScriptCheckThreads = 0;
 bool fImporting = false;
 bool fReindex = false;
 bool fBenchmark = false;
-bool fTxIndex = true; // always true in twister
+bool fTxIndex = true; // always true in freespeech
 unsigned int nCoinCacheSize = 5000;
 bool fHaveGUI = false;
 
@@ -63,7 +63,7 @@ multimap<uint256, CBlock*> mapOrphanBlocksByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "twister Signed Message:\n";
+const string strMessageMagic = "freespeech Signed Message:\n";
 
 double dHashesPerSec = 0.0;
 int64 nHPSTimerStart = 0;
@@ -822,8 +822,8 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
     return pblock->GetHash();
 }
 
-static const int64 nTargetTimespan = 14 * 24 * 60 * 60; // two weeks
-static const int64 nTargetSpacing = 10 * 60;
+static const int64 nTargetTimespan = 1 * 60 * 60; // one hour
+static const int64 nTargetSpacing = 1;
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
 
 //
@@ -1184,7 +1184,7 @@ bool ConnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex, C
         uint256 hashBlock = 0;
         if( GetTransaction(block.vtx[i].GetUsername(), txOld, hashBlock) ) {
             /* We have index for this username, which is not allowed, except:
-             * 1) same transaction. this shouldn't happen but it does if twisterd terminates badly.
+             * 1) same transaction. this shouldn't happen but it does if freespeechd terminates badly.
              *    explanation: TxIndex seems to get out-of-sync with block chain, so it may try to
              *    reconnect blocks which transactions are already written to the tx index.
              * 2) possibly a key replacement. check if new key is signed by the old one.
@@ -2130,7 +2130,7 @@ bool static LoadBlockIndexDB()
     //bool readTxIndex;
     //pblocktree->ReadFlag("txindex", readTxIndex);
     //printf("LoadBlockIndexDB(): transaction index %s\n", readTxIndex ? "enabled" : "disabled");
-    //assert( readTxIndex ); // always true in twister
+    //assert( readTxIndex ); // always true in freespeech
 
     // Load hashBestChain pointer to end of best chain
     pindexBest = pcoinsTip->GetBestBlock();

@@ -60,10 +60,10 @@ am__make_running_with_option = \
   test $$has_opt = yes
 am__make_dryrun = (target_option=n; $(am__make_running_with_option))
 am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-pkgdatadir = $(datadir)/twister
-pkgincludedir = $(includedir)/twister
-pkglibdir = $(libdir)/twister
-pkglibexecdir = $(libexecdir)/twister
+pkgdatadir = $(datadir)/freespeech
+pkgincludedir = $(includedir)/freespeech
+pkglibdir = $(libdir)/freespeech
+pkglibexecdir = $(libexecdir)/freespeech
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -79,7 +79,7 @@ POST_UNINSTALL = :
 build_triplet = x86_64-apple-darwin14.0.0
 host_triplet = x86_64-apple-darwin14.0.0
 target_triplet = x86_64-apple-darwin14.0.0
-bin_PROGRAMS = twisterd$(EXEEXT)
+bin_PROGRAMS = freespeechd$(EXEEXT)
 subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
@@ -123,7 +123,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__twisterd_SOURCES_DIST = libtorrent/src/web_connection_base.cpp \
+am__freespeechd_SOURCES_DIST = libtorrent/src/web_connection_base.cpp \
 	libtorrent/src/alert.cpp libtorrent/src/alert_manager.cpp \
 	libtorrent/src/allocator.cpp libtorrent/src/asio.cpp \
 	libtorrent/src/assert.cpp libtorrent/src/bandwidth_limit.cpp \
@@ -201,8 +201,8 @@ am__twisterd_SOURCES_DIST = libtorrent/src/web_connection_base.cpp \
 	src/softcheckpoint.cpp src/sync.cpp src/util.cpp \
 	src/wallet.cpp src/walletdb.cpp src/hash.cpp src/bloom.cpp \
 	src/noui.cpp src/leveldb.cpp src/txdb.cpp src/chainparams.cpp \
-	src/dhtproxy.cpp src/twister.cpp src/twister_rss.cpp \
-	src/twister_utils.cpp src/scrypt-sse2.cpp
+	src/dhtproxy.cpp src/freespeech.cpp src/freespeech_rss.cpp \
+	src/freespeech_utils.cpp src/scrypt-sse2.cpp
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_1 = libtorrent/src/kademlia/dht_tracker.$(OBJEXT) \
 	libtorrent/src/kademlia/find_data.$(OBJEXT) \
@@ -307,17 +307,17 @@ am__objects_6 = src/alert.$(OBJEXT) src/version.$(OBJEXT) \
 	src/walletdb.$(OBJEXT) src/hash.$(OBJEXT) src/bloom.$(OBJEXT) \
 	src/noui.$(OBJEXT) src/leveldb.$(OBJEXT) src/txdb.$(OBJEXT) \
 	src/chainparams.$(OBJEXT) src/dhtproxy.$(OBJEXT) \
-	src/twister.$(OBJEXT) src/twister_rss.$(OBJEXT) \
-	src/twister_utils.$(OBJEXT) $(am__objects_5)
-am_twisterd_OBJECTS = $(am__objects_4) $(am__objects_6)
-twisterd_OBJECTS = $(am_twisterd_OBJECTS)
+	src/freespeech.$(OBJEXT) src/freespeech_rss.$(OBJEXT) \
+	src/freespeech_utils.$(OBJEXT) $(am__objects_5)
+am_freespeechd_OBJECTS = $(am__objects_4) $(am__objects_6)
+freespeechd_OBJECTS = $(am_freespeechd_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-twisterd_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+freespeechd_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(twisterd_LDFLAGS) $(LDFLAGS) -o $@
+	$(CXXFLAGS) $(freespeechd_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -370,8 +370,8 @@ AM_V_CXXLD = $(am__v_CXXLD_$(V))
 am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(twisterd_SOURCES)
-DIST_SOURCES = $(am__twisterd_SOURCES_DIST)
+SOURCES = $(freespeechd_SOURCES)
+DIST_SOURCES = $(am__freespeechd_SOURCES_DIST)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -415,13 +415,13 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /Developer/twister-core/build-aux/missing aclocal-1.14
+ACLOCAL = ${SHELL} /Developer/freespeech-core/build-aux/missing aclocal-1.14
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = ar
-AUTOCONF = ${SHELL} /Developer/twister-core/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /Developer/twister-core/build-aux/missing autoheader
-AUTOMAKE = ${SHELL} /Developer/twister-core/build-aux/missing automake-1.14
+AUTOCONF = ${SHELL} /Developer/freespeech-core/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /Developer/freespeech-core/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /Developer/freespeech-core/build-aux/missing automake-1.14
 AWK = awk
 BOOST_CHRONO_LIB = -lboost_chrono-mt
 BOOST_CPPFLAGS = -pthread -I/usr/local/include
@@ -449,7 +449,7 @@ DB_CXX_CPPFLAGS = -I/usr/local/opt/berkeley-db4/include
 DB_CXX_LDFLAGS = -L/usr/local/opt/berkeley-db4/lib
 DB_CXX_LIBS = -ldb_cxx -ldb
 DEBUGFLAGS = -g
-DEFS = -DPACKAGE_NAME=\"twister\" -DPACKAGE_TARNAME=\"twister\" -DPACKAGE_VERSION=\"0.9.0\" -DPACKAGE_STRING=\"twister\ 0.9.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"twister\" -DVERSION=\"0.9.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\" -DHAVE_PTHREAD=1 -DHAVE_BOOST=/\*\*/ -DHAVE_BOOST_SYSTEM=/\*\*/ -DHAVE_BOOST_FILESYSTEM=/\*\*/ -DHAVE_BOOST_PROGRAM_OPTIONS=/\*\*/ -DHAVE_BOOST_THREAD=/\*\*/ -DHAVE_BOOST_CHRONO=/\*\*/ -DHAVE_BOOST_LOCALE=/\*\*/ -DHAVE_BOOST_REGEX=/\*\*/ -DDB_CXX_HEADER=\"db_cxx.h\" -DHAVE_GETHOSTBYNAME=1 -DTORRENT_DEBUG=1 -DTORRENT_LOGGING=1 -DTORRENT_USE_OPENSSL=1 -DUSE_SSE2=1 -DWITH_SHIPPED_GEOIP_H=1 -DBOOST_ASIO_HASH_MAP_BUCKETS=1021 -DBOOST_EXCEPTION_DISABLE=1 -DBOOST_ASIO_ENABLE_CANCELIO=1 -DBOOST_ASIO_DYN_LINK=1 -DTORRENT_BUILDING_SHARED=1
+DEFS = -DPACKAGE_NAME=\"freespeech\" -DPACKAGE_TARNAME=\"freespeech\" -DPACKAGE_VERSION=\"0.9.0\" -DPACKAGE_STRING=\"freespeech\ 0.9.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"freespeech\" -DVERSION=\"0.9.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\" -DHAVE_PTHREAD=1 -DHAVE_BOOST=/\*\*/ -DHAVE_BOOST_SYSTEM=/\*\*/ -DHAVE_BOOST_FILESYSTEM=/\*\*/ -DHAVE_BOOST_PROGRAM_OPTIONS=/\*\*/ -DHAVE_BOOST_THREAD=/\*\*/ -DHAVE_BOOST_CHRONO=/\*\*/ -DHAVE_BOOST_LOCALE=/\*\*/ -DHAVE_BOOST_REGEX=/\*\*/ -DDB_CXX_HEADER=\"db_cxx.h\" -DHAVE_GETHOSTBYNAME=1 -DTORRENT_DEBUG=1 -DTORRENT_LOGGING=1 -DTORRENT_USE_OPENSSL=1 -DUSE_SSE2=1 -DWITH_SHIPPED_GEOIP_H=1 -DBOOST_ASIO_HASH_MAP_BUCKETS=1021 -DBOOST_EXCEPTION_DISABLE=1 -DBOOST_ASIO_ENABLE_CANCELIO=1 -DBOOST_ASIO_DYN_LINK=1 -DTORRENT_BUILDING_SHARED=1
 DEPDIR = .deps
 DLLTOOL = false
 DSYMUTIL = dsymutil
@@ -482,7 +482,7 @@ LIPO = lipo
 LN_S = ln -s
 LTLIBICONV = -liconv
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /Developer/twister-core/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /Developer/freespeech-core/build-aux/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = build-aux/install-sh -c -d
 NM = /usr/bin/nm
@@ -494,11 +494,11 @@ OPENSSL_LDFLAGS = -L/usr/local/opt/openssl/lib
 OPENSSL_LIBS = -lssl -lcrypto
 OTOOL = otool
 OTOOL64 = :
-PACKAGE = twister
+PACKAGE = freespeech
 PACKAGE_BUGREPORT = 
-PACKAGE_NAME = twister
-PACKAGE_STRING = twister 0.9.0
-PACKAGE_TARNAME = twister
+PACKAGE_NAME = freespeech
+PACKAGE_STRING = freespeech 0.9.0
+PACKAGE_TARNAME = freespeech
 PACKAGE_URL = 
 PACKAGE_VERSION = 0.9.0
 PATH_SEPARATOR = :
@@ -525,10 +525,10 @@ SHELL = /bin/sh
 STRIP = strip
 VERSION = 0.9.0
 WINDOWS_BITS = 
-abs_builddir = /Developer/twister-core
-abs_srcdir = /Developer/twister-core
-abs_top_builddir = /Developer/twister-core
-abs_top_srcdir = /Developer/twister-core
+abs_builddir = /Developer/freespeech-core
+abs_srcdir = /Developer/freespeech-core
+abs_top_builddir = /Developer/freespeech-core
+abs_top_srcdir = /Developer/freespeech-core
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -559,7 +559,7 @@ host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /Developer/twister-core/build-aux/install-sh
+install_sh = ${SHELL} /Developer/freespeech-core/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -733,15 +733,15 @@ BITCOIN_TWISTER_SOURCES = \
     src/txdb.cpp \
     src/chainparams.cpp \
     src/dhtproxy.cpp \
-    src/twister.cpp \
-    src/twister_rss.cpp \
-    src/twister_utils.cpp \
+    src/freespeech.cpp \
+    src/freespeech_rss.cpp \
+    src/freespeech_utils.cpp \
     $(SSE2_SOURCES)
 
-twisterd_SOURCES = $(LIBTORRENT_SOURCES) $(BITCOIN_TWISTER_SOURCES)
-twisterd_LDFLAGS = -L/usr/local/opt/openssl/lib -L/usr/local/opt/berkeley-db4/lib
-twisterd_DEPENDENCIES = $(LIBLEVELDB) $(LIBMEMENV)
-twisterd_LDADD = $(LIBLEVELDB) $(LIBMEMENV) \
+freespeechd_SOURCES = $(LIBTORRENT_SOURCES) $(BITCOIN_TWISTER_SOURCES)
+freespeechd_LDFLAGS = -L/usr/local/opt/openssl/lib -L/usr/local/opt/berkeley-db4/lib
+freespeechd_DEPENDENCIES = $(LIBLEVELDB) $(LIBMEMENV)
+freespeechd_LDADD = $(LIBLEVELDB) $(LIBMEMENV) \
     -lboost_system -lboost_filesystem -lboost_program_options-mt -lboost_thread-mt -lboost_chrono-mt -lboost_locale-mt \
     -lboost_regex-mt -L/usr/local/lib -ldb_cxx -ldb -lssl -lcrypto
 
@@ -1144,18 +1144,18 @@ src/chainparams.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/dhtproxy.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/twister.$(OBJEXT): src/$(am__dirstamp) \
+src/freespeech.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/twister_rss.$(OBJEXT): src/$(am__dirstamp) \
+src/freespeech_rss.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/twister_utils.$(OBJEXT): src/$(am__dirstamp) \
+src/freespeech_utils.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/scrypt-sse2.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 
-twisterd$(EXEEXT): $(twisterd_OBJECTS) $(twisterd_DEPENDENCIES) $(EXTRA_twisterd_DEPENDENCIES) 
-	@rm -f twisterd$(EXEEXT)
-	$(AM_V_CXXLD)$(twisterd_LINK) $(twisterd_OBJECTS) $(twisterd_LDADD) $(LIBS)
+freespeechd$(EXEEXT): $(freespeechd_OBJECTS) $(freespeechd_DEPENDENCIES) $(EXTRA_freespeechd_DEPENDENCIES) 
+	@rm -f freespeechd$(EXEEXT)
+	$(AM_V_CXXLD)$(freespeechd_LINK) $(freespeechd_OBJECTS) $(freespeechd_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -1292,9 +1292,9 @@ include src/$(DEPDIR)/scrypt-sse2.Po
 include src/$(DEPDIR)/scrypt.Po
 include src/$(DEPDIR)/softcheckpoint.Po
 include src/$(DEPDIR)/sync.Po
-include src/$(DEPDIR)/twister.Po
-include src/$(DEPDIR)/twister_rss.Po
-include src/$(DEPDIR)/twister_utils.Po
+include src/$(DEPDIR)/freespeech.Po
+include src/$(DEPDIR)/freespeech_rss.Po
+include src/$(DEPDIR)/freespeech_utils.Po
 include src/$(DEPDIR)/txdb.Po
 include src/$(DEPDIR)/util.Po
 include src/$(DEPDIR)/version.Po

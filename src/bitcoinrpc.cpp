@@ -12,8 +12,8 @@
 #include "bitcoinrpc.h"
 #include "db.h"
 
-#include "twister_utils.h"
-#include "twister_rss.h"
+#include "freespeech_utils.h"
+#include "freespeech_rss.h"
 
 #include <boost/algorithm/string.hpp>
 #include <boost/asio.hpp>
@@ -182,10 +182,10 @@ Value stop(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "Stop Twister server.");
+            "Stop Freespeech server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "Twister server stopping";
+    return "Freespeech server stopping";
 }
 
 
@@ -244,7 +244,7 @@ static const CRPCCommand vRPCCommands[] =
     { "sendnewusertransaction", &sendnewusertransaction, false,     false,      false },
     { "verifychain",            &verifychain,            true,      false,      false },
     { "getlastsoftcheckpoint",  &getlastsoftcheckpoint,  true,      false,      false },
-    // twister dht network
+    // freespeech dht network
     { "dhtput",                 &dhtput,                 false,     true,       false },
     { "dhtget",                 &dhtget,                 false,     true,       true },
     { "newpostmsg",             &newpostmsg,             false,     true,       false },
@@ -743,7 +743,7 @@ void StartRPCThreads()
     {
         unsigned char rand_pwd[32];
         RAND_bytes(rand_pwd, 32);
-        string strWhatAmI = "To use twisterd";
+        string strWhatAmI = "To use freespeechd";
         if (mapArgs.count("-server"))
             strWhatAmI = strprintf(_("To use the %s option"), "\"-server\"");
         else if (mapArgs.count("-daemon"))
@@ -759,7 +759,7 @@ void StartRPCThreads()
               "The username and password MUST NOT be the same.\n"
               "If the file does not exist, create it with owner-readable-only file permissions.\n"
               "It is also recommended to set alertnotify so you are notified of problems;\n"
-              "for example: alertnotify=echo %%s | mail -s \"Twister Alert\" admin@foo.com\n"),
+              "for example: alertnotify=echo %%s | mail -s \"Freespeech Alert\" admin@foo.com\n"),
                 strWhatAmI.c_str(),
                 GetConfigFile().string().c_str(),
                 EncodeBase58(&rand_pwd[0],&rand_pwd[0]+32).c_str()),

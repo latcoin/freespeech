@@ -1,4 +1,4 @@
-src/twister_utils.o: src/twister_utils.cpp src/twister_utils.h \
+src/freespeech_utils.o: src/freespeech_utils.cpp src/freespeech_utils.h \
   src/json/json_spirit.h src/json/json_spirit_value.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/vector \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__config \
@@ -1600,7 +1600,7 @@ src/twister_utils.o: src/twister_utils.cpp src/twister_utils.h \
   /usr/local/include/boost/range/detail/safe_bool.hpp \
   /usr/local/include/boost/detail/basic_pointerbuf.hpp
 
-src/twister_utils.h:
+src/freespeech_utils.h:
 
 src/json/json_spirit.h:
 

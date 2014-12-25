@@ -1293,7 +1293,7 @@ libtorrent/src/disk_io_thread.o: libtorrent/src/disk_io_thread.cpp \
   libtorrent/include/libtorrent/file_pool.hpp \
   /usr/local/include/boost/scoped_array.hpp \
   /usr/local/include/boost/smart_ptr/scoped_array.hpp \
-  libtorrent/src/../../src/twister.h src/util.h src/uint256.h \
+  libtorrent/src/../../src/freespeech.h src/util.h src/uint256.h \
   /usr/local/include/boost/thread.hpp \
   /usr/local/include/boost/thread/thread.hpp \
   /usr/local/include/boost/thread/thread_only.hpp \
@@ -4127,7 +4127,7 @@ libtorrent/include/libtorrent/file_pool.hpp:
 
 /usr/local/include/boost/smart_ptr/scoped_array.hpp:
 
-libtorrent/src/../../src/twister.h:
+libtorrent/src/../../src/freespeech.h:
 
 src/util.h:
 

@@ -29,10 +29,10 @@ struct UserData {
 };
 
 
-class twister_utils
+class freespeech_utils
 {
 public:
-    twister_utils();
+    freespeech_utils();
 };
 
 int load_file(std::string const& filename, std::vector<char>& v, int limit = 8000000);

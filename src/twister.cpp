@@ -1,6 +1,6 @@
-#include "twister.h"
+#include "freespeech.h"
 
-#include "twister_utils.h"
+#include "freespeech_utils.h"
 #include "dhtproxy.h"
 
 #include "main.h"
@@ -23,7 +23,7 @@ using namespace std;
 
 #include <time.h>
 
-twister::twister()
+freespeech::freespeech()
 {
 }
 
@@ -52,7 +52,7 @@ static int num_outstanding_resume_data;
 static CCriticalSection cs_dhtgetMap;
 static map<sha1_hash, std::list<alert_manager*> > m_dhtgetMap;
 
-static CCriticalSection cs_twister;
+static CCriticalSection cs_freespeech;
 static map<std::string, bool> m_specialResources;
 enum ExpireResType { SimpleNoExpire, NumberedNoExpire, PostNoExpireRecent };
 static map<std::string, ExpireResType> m_noExpireResources;
@@ -134,12 +134,12 @@ void dhtgetMapPost(sha1_hash &ih, const alert &a)
 
 torrent_handle startTorrentUser(std::string const &username, bool following)
 {
-    bool userInTxDb = usernameExists(username); // keep this outside cs_twister to avoid deadlock
+    bool userInTxDb = usernameExists(username); // keep this outside cs_freespeech to avoid deadlock
     boost::shared_ptr<session> ses(m_ses);
     if( !userInTxDb || !ses )
         return torrent_handle();
 
-    LOCK(cs_twister);
+    LOCK(cs_freespeech);
     if( !m_userTorrent.count(username) ) {
         sha1_hash ih = dhtTargetHash(username, "tracker", "m");
 
@@ -173,7 +173,7 @@ torrent_handle startTorrentUser(std::string const &username, bool following)
 
 torrent_handle getTorrentUser(std::string const &username)
 {
-    LOCK(cs_twister);
+    LOCK(cs_freespeech);
     if( m_userTorrent.count(username) )
         return m_userTorrent[username];
     else
@@ -202,7 +202,7 @@ int torrentNumPieces(std::string const &username)
 
 int saveGlobalData(std::string const& filename)
 {
-    LOCK(cs_twister);
+    LOCK(cs_freespeech);
     entry globalDict;
 
     globalDict["preferredSpamLang"] = m_preferredSpamLang;
@@ -223,7 +223,7 @@ int saveGlobalData(std::string const& filename)
 
 int loadGlobalData(std::string const& filename)
 {
-    LOCK(cs_twister);
+    LOCK(cs_freespeech);
     std::vector<char> in;
     if (load_file(filename, in) == 0) {
         lazy_entry userDict;
@@ -262,7 +262,7 @@ data_error:
 
 void ThreadWaitExtIP()
 {
-    SimpleThreadCounter threadCounter(&cs_twister, &m_threadsToJoin, "wait-extip");
+    SimpleThreadCounter threadCounter(&cs_freespeech, &m_threadsToJoin, "wait-extip");
 
     std::string ipStr;
 
@@ -351,7 +351,7 @@ void ThreadWaitExtIP()
         }
     }
     
-    session_settings settings("twisterd/"+FormatFullVersion());
+    session_settings settings("freespeechd/"+FormatFullVersion());
     // settings to test local connections
     settings.allow_multiple_connections_per_ip = true;
     //settings.enable_outgoing_utp = false; // (false to see connections in netstat)
@@ -363,7 +363,7 @@ void ThreadWaitExtIP()
         settings.anonymous_mode = true;
         settings.force_proxy = true; // DHT won't work
     }
-    // disable read cache => there is still some bug due to twister piece size changes
+    // disable read cache => there is still some bug due to freespeech piece size changes
     settings.use_read_cache = false;
     settings.cache_size = 0;
 
@@ -401,7 +401,7 @@ void ThreadWaitExtIP()
 
     std::set<std::string> torrentsToStart;
     {
-        LOCK(cs_twister);
+        LOCK(cs_freespeech);
         boost::filesystem::path userDataPath = GetDataDir() / USER_DATA_FILE;
         loadUserData(userDataPath.string(), m_users);
         printf("loaded user_data for %zd users\n", m_users.size());
@@ -467,7 +467,7 @@ void saveTorrentResumeData()
 
 void lockAndSaveUserData()
 {
-    LOCK(cs_twister);
+    LOCK(cs_freespeech);
     if( m_users.size() ) {
         printf("saving user_data (followers and DMs)...\n");
         boost::filesystem::path userDataPath = GetDataDir() / USER_DATA_FILE;
@@ -559,7 +559,7 @@ void torrentManualTrackerUpdate(const std::string &username)
 
 void ThreadMaintainDHTNodes()
 {
-    SimpleThreadCounter threadCounter(&cs_twister, &m_threadsToJoin, "maintain-dht-nodes");
+    SimpleThreadCounter threadCounter(&cs_freespeech, &m_threadsToJoin, "maintain-dht-nodes");
 
     while(!m_ses && !m_shuttingDownSession) {
         MilliSleep(200);
@@ -637,7 +637,7 @@ void ThreadMaintainDHTNodes()
             ss = ses->status();
             if( ss.dht_nodes > dht_nodes ) {
                 // new nodes were added to dht: force updating peers from dht so torrents may start faster
-                LOCK(cs_twister);
+                LOCK(cs_freespeech);
                 BOOST_FOREACH(const PAIRTYPE(std::string, torrent_handle)& item, m_userTorrent) {
                     item.second.force_dht_announce();
                 }
@@ -668,7 +668,7 @@ void ThreadMaintainDHTNodes()
             GetTime() > lastManualTrackerUpdate + 60 ) {
             list<string> activeTorrents;
             {
-                LOCK(cs_twister);
+                LOCK(cs_freespeech);
                 BOOST_FOREACH(const PAIRTYPE(std::string, torrent_handle)& item, m_userTorrent) {
                     activeTorrents.push_back(item.first);
                 }
@@ -706,7 +706,7 @@ void ThreadSessionAlerts()
     static map<sha1_hash, bool> neighborCheck;
     static map<sha1_hash, int64_t> statusCheck;
 
-    SimpleThreadCounter threadCounter(&cs_twister, &m_threadsToJoin, "session-alerts");
+    SimpleThreadCounter threadCounter(&cs_freespeech, &m_threadsToJoin, "session-alerts");
     
     while(!m_ses && !m_shuttingDownSession) {
         MilliSleep(200);
@@ -776,7 +776,7 @@ void ThreadSessionAlerts()
                                     
                                     bool knownTorrent = false;
                                     {
-                                        LOCK(cs_twister);
+                                        LOCK(cs_freespeech);
                                         knownTorrent = m_userTorrent.count(n->string());
                                     }
                                     if( !knownTorrent ) {
@@ -868,7 +868,7 @@ void ThreadSessionAlerts()
 
 void ThreadHashtagsAging()
 {
-    SimpleThreadCounter threadCounter(&cs_twister, &m_threadsToJoin, "hashtags-aging");
+    SimpleThreadCounter threadCounter(&cs_freespeech, &m_threadsToJoin, "hashtags-aging");
 
     while(!m_ses && !m_shuttingDownSession) {
         MilliSleep(200);
@@ -934,10 +934,10 @@ void stopSessionTorrent()
             int threadsToJoin = 0;
             do {
                 MilliSleep(100);
-                LOCK(cs_twister);
+                LOCK(cs_freespeech);
                 if( threadsToJoin != m_threadsToJoin ) {
                     threadsToJoin = m_threadsToJoin;
-                    printf("twister threads to join = %d\n", threadsToJoin);
+                    printf("freespeech threads to join = %d\n", threadsToJoin);
                 }
             } while( threadsToJoin );
 
@@ -1116,7 +1116,7 @@ bool processReceivedDM(lazy_entry const* post)
                     stoDM.m_text    = msg;
                     stoDM.m_utcTime = post->dict_find_int_value("time");
 
-                    LOCK(cs_twister);
+                    LOCK(cs_freespeech);
                     // store this dm in memory list, but prevent duplicates
                     std::vector<StoredDirectMsg> &dmsFromToUser = m_users[item.second.username].
                                                   m_directmsg[fromMe ? to : from];
@@ -1161,7 +1161,7 @@ void processReceivedPost(lazy_entry const &v, std::string &username, int64 time,
             boost::algorithm::to_lower(mentionUser);
 #endif
 
-            LOCK(cs_twister);
+            LOCK(cs_freespeech);
             // mention of a local user && sent by someone we follow
             if( m_users.count(mentionUser) && m_users[mentionUser].m_following.count(username) ) {
                 std::string postKey = username + ";" + boost::lexical_cast<std::string>(time);
@@ -1951,7 +1951,7 @@ Value newdirectmsg(const Array& params, bool fHelp)
             stoDM.m_text    = strMsg;
             stoDM.m_utcTime = v["userpost"]["time"].integer();
 
-            LOCK(cs_twister);
+            LOCK(cs_freespeech);
             m_users[strFrom].m_directmsg[strTo].push_back(stoDM);
         }
 
@@ -2128,7 +2128,7 @@ Value getdirectmsgs(const Array& params, bool fHelp)
             if( i->name_ == "since_id" ) since_id = i->value_.get_int();
         }
 
-        LOCK(cs_twister);
+        LOCK(cs_freespeech);
         if( remoteUsername.size() && m_users.count(strUsername) &&
             m_users[strUsername].m_directmsg.count(remoteUsername) ){
             std::vector<StoredDirectMsg> &dmsFromToUser = m_users[strUsername].m_directmsg[remoteUsername];
@@ -2178,7 +2178,7 @@ Value getmentions(const Array& params, bool fHelp)
     
     Array ret;
 
-    LOCK(cs_twister);
+    LOCK(cs_freespeech);
     if( strUsername.size() && m_users.count(strUsername) ) {
         const std::vector<libtorrent::entry> &mentions = m_users[strUsername].m_mentionsPosts;
         max_id = std::min( max_id, (int)mentions.size()-1);
@@ -2261,7 +2261,7 @@ Value follow(const Array& params, bool fHelp)
         torrent_handle h = startTorrentUser(username, true);
 
         if( h.is_valid() ) {
-            LOCK(cs_twister);
+            LOCK(cs_freespeech);
             m_users[localUser].m_following.insert(username);
         }
     }
@@ -2279,7 +2279,7 @@ Value unfollow(const Array& params, bool fHelp)
     string localUser = params[0].get_str();
     Array users      = params[1].get_array();
 
-    LOCK(cs_twister);
+    LOCK(cs_freespeech);
     for( unsigned int u = 0; u < users.size(); u++ ) {
         string username = users[u].get_str();
 
@@ -2302,7 +2302,7 @@ Value getfollowing(const Array& params, bool fHelp)
     string localUser = params[0].get_str();
 
     Array ret;
-    LOCK(cs_twister);
+    LOCK(cs_freespeech);
     if( m_users.count(localUser) ) {
         BOOST_FOREACH(string username, m_users[localUser].m_following) {
             ret.push_back(username);
@@ -2322,7 +2322,7 @@ Value getlasthave(const Array& params, bool fHelp)
 
     std::set<std::string> following;
     {
-        LOCK(cs_twister);
+        LOCK(cs_freespeech);
         if( m_users.count(localUser) )
             following = m_users[localUser].m_following;
     }
@@ -2346,7 +2346,7 @@ Value getnumpieces(const Array& params, bool fHelp)
 
     std::set<std::string> following;
     {
-        LOCK(cs_twister);
+        LOCK(cs_freespeech);
         if( m_users.count(localUser) )
             following = m_users[localUser].m_following;
     }
@@ -2378,7 +2378,7 @@ Value listusernamespartial(const Array& params, bool fHelp)
     {
         LOCK(pwalletMain->cs_wallet);
         BOOST_FOREACH(const PAIRTYPE(CKeyID, CKeyMetadata)& item, pwalletMain->mapKeyMetadata) {
-            LOCK(cs_twister);
+            LOCK(cs_freespeech);
             BOOST_FOREACH(const string &user, m_users[item.second.username].m_following) {
                 if( (exact_match && userStartsWith.size() != user.size()) ||
                     userStartsWith.size() > user.size() ) {
@@ -2414,7 +2414,7 @@ Value rescandirectmsgs(const Array& params, bool fHelp)
 
     std::set<std::string> following;
     {
-        LOCK(cs_twister);
+        LOCK(cs_freespeech);
         following = m_users[localUser].m_following;
     }
 
@@ -2777,7 +2777,7 @@ Value search(const Array& params, bool fHelp)
 
         // search public messages in torrents
         {
-            LOCK(cs_twister);
+            LOCK(cs_freespeech);
 
             std::map<std::string,torrent_handle> users;
 
@@ -2863,7 +2863,7 @@ Value search(const Array& params, bool fHelp)
             TextSearch searcher(keyword, options);
 
             {
-                LOCK(cs_twister);
+                LOCK(cs_freespeech);
 
                 BOOST_FOREACH(const PAIRTYPE(std::string,std::vector<StoredDirectMsg>)& list, m_users[username].m_directmsg) {
                     string remoteUser = list.first;

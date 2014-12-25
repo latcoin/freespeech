@@ -1311,7 +1311,7 @@ src/init.o: src/init.cpp src/init.h src/wallet.h src/walletdb.h src/db.h \
   /usr/local/include/boost/spirit/home/classic/iterator/position_iterator_fwd.hpp \
   /usr/local/include/boost/spirit/home/classic/iterator/impl/position_iterator.ipp \
   src/json/json_spirit_writer_template.h src/json/json_spirit_utils.h \
-  src/checkpoints.h src/softcheckpoint.h src/twister.h \
+  src/checkpoints.h src/softcheckpoint.h src/freespeech.h \
   src/json/json_spirit.h src/json/json_spirit_reader.h \
   src/json/json_spirit_writer.h \
   /usr/local/include/boost/filesystem/fstream.hpp \
@@ -4158,7 +4158,7 @@ src/checkpoints.h:
 
 src/softcheckpoint.h:
 
-src/twister.h:
+src/freespeech.h:
 
 src/json/json_spirit.h:
 

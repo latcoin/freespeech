@@ -1,4 +1,4 @@
-src/twister.o: src/twister.cpp src/twister.h src/util.h src/uint256.h \
+src/freespeech.o: src/freespeech.cpp src/freespeech.h src/util.h src/uint256.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/6.0/include/limits.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/limits.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/sys/cdefs.h \
@@ -1116,7 +1116,7 @@ src/twister.o: src/twister.cpp src/twister.h src/util.h src/uint256.h \
   /usr/local/include/boost/variant/bad_visit.hpp \
   src/json/json_spirit_reader.h src/json/json_spirit_error_position.h \
   src/json/json_spirit_writer.h src/json/json_spirit_utils.h \
-  src/twister_utils.h libtorrent/include/libtorrent/entry.hpp \
+  src/freespeech_utils.h libtorrent/include/libtorrent/entry.hpp \
   libtorrent/include/libtorrent/size_type.hpp \
   libtorrent/include/libtorrent/config.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/AvailabilityMacros.h \
@@ -1910,7 +1910,7 @@ src/twister.o: src/twister.cpp src/twister.h src/util.h src/uint256.h \
   libtorrent/include/libtorrent/alert_dispatcher.hpp \
   libtorrent/include/libtorrent/kademlia/dht_observer.hpp
 
-src/twister.h:
+src/freespeech.h:
 
 src/util.h:
 
@@ -4174,7 +4174,7 @@ src/json/json_spirit_writer.h:
 
 src/json/json_spirit_utils.h:
 
-src/twister_utils.h:
+src/freespeech_utils.h:
 
 libtorrent/include/libtorrent/entry.hpp:
 

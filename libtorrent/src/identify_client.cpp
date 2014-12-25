@@ -216,7 +216,7 @@ namespace
 		, {"TR", "Transmission"}
 		, {"TS", "TorrentStorm"}
 		, {"TT", "TuoTu"}
-		, {"TW", "twister"}
+		, {"TW", "freespeech"}
 		, {"U",  "UPnP"}
 		, {"UL", "uLeecher"}
 		, {"UM", "uTorrent Mac"}

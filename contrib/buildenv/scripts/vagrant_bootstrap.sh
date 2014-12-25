@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TWISTER_CORE_PATH='/home/vagrant/twister-core'
-TWISTER_HOME='/home/vagrant/.twister'
+TWISTER_CORE_PATH='/home/vagrant/freespeech-core'
+TWISTER_HOME='/home/vagrant/.freespeech'
 AS_VAGRANT='sudo -u vagrant'
 
 if [ -n "$1" ]; then
@@ -29,7 +29,7 @@ function checkfail {
 
 
 echo
-echo 'Running bootstrap for twister-core'
+echo 'Running bootstrap for freespeech-core'
 echo "
 bootstrap=$bootstrap
 compile=$compile
@@ -63,14 +63,14 @@ echo '.. configuration & web gui'
 if [ ! -d "$TWISTER_HOME" ]; then
 	$AS_VAGRANT mkdir $TWISTER_HOME
 	cd $TWISTER_HOME
-	$AS_VAGRANT touch twister.conf
-	echo -e "rpcuser=user\nrpcpassword=pwd\nrpcallowip=*" > twister.conf
-	chmod 600 twister.conf
+	$AS_VAGRANT touch freespeech.conf
+	echo -e "rpcuser=user\nrpcpassword=pwd\nrpcallowip=*" > freespeech.conf
+	chmod 600 freespeech.conf
 fi
 
 if [ ! -d "$TWISTER_HOME/html" ]; then
 	cd "$TWISTER_HOME"
-	git clone https://github.com/miguelfreitas/twister-html.git html
+	git clone https://github.com/miguelfreitas/freespeech-html.git html
 	checkfail
 fi
 
@@ -99,9 +99,9 @@ fi
 
 
 if [ $run -eq 1 ]; then
-	echo '.. launching twisterd'
+	echo '.. launching freespeechd'
 	cd $TWISTER_CORE_PATH
-	$AS_VAGRANT -H ./twisterd -debug -daemon
+	$AS_VAGRANT -H ./freespeechd -debug -daemon
 fi
 
 
@@ -116,10 +116,10 @@ Create your account !
   
 If you want to do some development or other stuff then...
  $ vargrant ssh
- $ source twister-core/contrib/buildenv/scripts/activate
+ $ source freespeech-core/contrib/buildenv/scripts/activate
  
  This will give you some nice to have commands like
- * twister start|stop   -  to start and stop the server
+ * freespeech start|stop   -  to start and stop the server
  * twisted              -  alias to ~/twisted-core/twisted
 
 

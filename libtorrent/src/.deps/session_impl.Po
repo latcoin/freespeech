@@ -1604,7 +1604,7 @@ libtorrent/src/session_impl.o: libtorrent/src/session_impl.cpp \
   libtorrent/include/libtorrent/settings.hpp \
   libtorrent/include/libtorrent/extensions.hpp \
   libtorrent/include/libtorrent/random.hpp \
-  libtorrent/include/libtorrent/magnet_uri.hpp src/twister.h src/key.h \
+  libtorrent/include/libtorrent/magnet_uri.hpp src/freespeech.h src/key.h \
   src/hash.h /usr/local/opt/openssl/include/openssl/ripemd.h \
   src/json/json_spirit.h src/json/json_spirit_value.h \
   /usr/local/include/boost/variant.hpp \
@@ -4907,7 +4907,7 @@ libtorrent/include/libtorrent/random.hpp:
 
 libtorrent/include/libtorrent/magnet_uri.hpp:
 
-src/twister.h:
+src/freespeech.h:
 
 src/key.h:
 

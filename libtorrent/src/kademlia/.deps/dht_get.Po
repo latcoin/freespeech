@@ -1,5 +1,5 @@
 libtorrent/src/kademlia/dht_get.o: libtorrent/src/kademlia/dht_get.cpp \
-  libtorrent/include/../../src/twister.h src/util.h src/uint256.h \
+  libtorrent/include/../../src/freespeech.h src/util.h src/uint256.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/6.0/include/limits.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/limits.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/usr/include/sys/cdefs.h \
@@ -1340,7 +1340,7 @@ libtorrent/src/kademlia/dht_get.o: libtorrent/src/kademlia/dht_get.cpp \
   libtorrent/include/libtorrent/bencode.hpp \
   libtorrent/include/libtorrent/hasher.hpp
 
-libtorrent/include/../../src/twister.h:
+libtorrent/include/../../src/freespeech.h:
 
 src/util.h:
 
